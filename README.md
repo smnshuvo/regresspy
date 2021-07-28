@@ -2,7 +2,8 @@
 
 `regresspy` is a python module for carrying out simple regressions using gradient descent algorithm. However, the library is half complete. Your task is to fill in the necessary codes. The tasks of the project is given below:
 
-- Clone or fork this repository.
+- Fork this repository.
+- Create a new branch using your username.
 - Fill in the `.gitignore` file by creating one for Python from [.gitignore.io](https://www.toptal.com/developers/gitignore).
 - **Commit frequently, usually everytime after changing or completing a function. Make the commit messages clear and complete.** You may read this [blog](https://chris.beams.io/posts/git-commit/) to learn about writing good commit messages.
 - Write the codes for the mean absolute, sum of squared, mean squared, and root mean squared errors in the `loss.py` file.
