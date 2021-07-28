@@ -52,3 +52,4 @@ def rmse(pred: ndarray, label: ndarray) -> ndarray:
         (ndarray): root mean squared errors.
     """
     pass
+
