@@ -14,8 +14,8 @@ def forward(X: ndarray, Y: ndarray, weights: Dict[str, ndarray]) ->  Tuple[float
     Returns:
         (Tuple[float, Dict[str, ndarray]]): prediction, dictionary of weights and bias
     """
-    w = weights['w']
-    b = weights['b']
+    w = weights['W']
+    b = weights['B']
 
     N = #TODO Matrix Multiplication
     P = #TODO Adding Bias

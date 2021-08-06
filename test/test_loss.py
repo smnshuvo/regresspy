@@ -20,4 +20,3 @@ def test_mse():
 
 def test_rmse():
     pass
-

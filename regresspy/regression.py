@@ -69,8 +69,8 @@ class Regression(object):
         of the bias will be (1,1).
         """
         self._weights = {
-            'W': #TODO,
-            'B': #TODO
+            'W': np.random(X.shape[1]),
+            'B': np.random(1,1)
         }
     
     def _train(self, X: ndarray, Y: ndarray) -> None:

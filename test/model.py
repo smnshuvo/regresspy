@@ -3,8 +3,8 @@ import numpy as np
 from sklearn.linear_model import SGDRegressor
 from sklearn.datasets import load_iris
 
-from regresspy import Regression
-from regresspy import rmse
+from regresspy.regression import Regression
+from regresspy.loss import rmse
 
 
 iris = load_iris()
