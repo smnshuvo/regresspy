@@ -31,8 +31,7 @@ def sse(pred: ndarray, label: ndarray) -> ndarray:
     Returns:
         (ndarray): residual sum of squared errors.
     """
-    sse= np.sum((label-pred)**2)
-    return sse
+    return np.sum((label-pred)**2)
 
 
 def mse(pred: ndarray, label: ndarray) -> ndarray:
