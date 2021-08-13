@@ -1,14 +1,6 @@
 import numpy as np
 from numpy import ndarray
 
-global x, y
-x = np.array([1, 2, 3])
-y = np.array([1, 2, 4])
-
-""" Created this function to test my code """
-def _run():
-    print(mse(x, y))
-
 
 def _error(actual: np.ndarray, predicted: np.ndarray):
     """ Simple error """
@@ -25,7 +17,8 @@ def mae(pred: ndarray, label: ndarray) -> ndarray:
     Returns:
         (ndarray): mean absolute errors.
     """
-    pass
+    """ Mean Absolute Error """
+    return np.mean(np.abs(_error(label, pred)))
 
 
 def sse(pred: ndarray, label: ndarray) -> ndarray:
