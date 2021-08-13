@@ -3,7 +3,7 @@ from numpy import ndarray
 
 
 def _error(actual: np.ndarray, predicted: np.ndarray):
-    """ Simple error """
+    """ My custom error function """
     return actual - predicted
 
 
