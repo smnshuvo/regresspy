@@ -1,6 +1,14 @@
 import numpy as np
 from numpy import ndarray
 
+global x, y
+x = np.array([1, 2, 3])
+y = np.array([1, 2, 4])
+
+""" Created this function to test my code """
+def _run():
+    print(mse(x, y))
+
 
 def _error(actual: np.ndarray, predicted: np.ndarray):
     """ Simple error """
@@ -59,4 +67,3 @@ def rmse(pred: ndarray, label: ndarray) -> ndarray:
     """
     """ Root Mean Squared Error """
     return np.sqrt(mse(label, pred))
-

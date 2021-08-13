@@ -7,7 +7,6 @@
     <list default="true" id="7bd93e9d-1f30-49e7-909a-e85ba0c3e319" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/regresspy/loss.py" beforeDir="false" afterPath="$PROJECT_DIR$/regresspy/loss.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/regresspy/regression.py" beforeDir="false" afterPath="$PROJECT_DIR$/regresspy/regression.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
