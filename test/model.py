@@ -15,11 +15,11 @@ Y = iris.data[:, 1].reshape(-1, 1)
 #TODO Perform a linear regression using sklearn and calculate training rmse.
 # Use the SGDRegressor and only select set learning rate and epochs.
 
-stochastic_gradient_descent = SGDRegressor(max_iter= 100, learning_rate= 'constant', eta0= 0.001)
-stochastic_gradient_descent.fit(X, Y.reshape(-1))
-sto_chas_grad_prediction = stochastic_gradient_descent.predict(X)
-sto_chas_grad_rmse = rmse(sto_chas_grad_prediction, Y)
-print('Stochastic Gradient Descent Regressor RMSE value:', str(sto_chas_grad_rmse))
+st_grad_dcnt = SGDRegressor(max_iter= 100, learning_rate= 'constant', eta0= 0.001)
+st_grad_dcnt.fit(X, Y.reshape(-1))
+st_ch_grad_precd = st_grad_dcnt.predict(X)
+st_chas_grad_rmse = rmse(st_ch_grad_precd, Y)
+print('Stochastic Gradient Descent Regressor RMSE value:', str(st_chas_grad_rmse))
 
 # #TODO Perform a linear regression using your code and calculate training rmse.
 
