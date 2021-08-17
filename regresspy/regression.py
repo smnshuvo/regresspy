@@ -3,59 +3,66 @@ from typing import Dict, Tuple
 import numpy as np
 from numpy import ndarray
 
-
-def forward(X: ndarray, Y: ndarray, weights: Dict[str, ndarray]) ->  Tuple[float, Dict[str, ndarray]]:
-    """Performs a single forward pass of the gradient descent.
-
-    Args:
-        X (ndarray): the input data.
-        Y (ndarray): the ground truths.
-        weights (Dict[str, ndarray]): a dictionary containing weights and bias.
-    Returns:
-        (Tuple[float, Dict[str, ndarray]]): prediction, dictionary of weights and bias
-    """
-    w = weights['W']
-    b = weights['B']
-
-    N = np.dot(X,w) #TODO Matrix Multiplication
-    P = N + b #TODO Adding Bias
-    loss = np.mean(np.power((Y-P), 2))
-    #TODO Compute Mean Squared Error
-
-    info = {}
-    info['X'] = X
-    info['Y'] = Y
-    info['N'] = N
-    info['P'] = P
-
-    return loss, info
+from loss import mae, sse, mse, rmse
+from gradient_descent import forward, backward
+from regresspy import loss
 
 
-def backward(info: Dict[str, ndarray], weights: Dict[str, ndarray]) -> Dict[str, ndarray]:
-    """Computes and returns the gradients of weights and bias.
+class Regression(object):
+    def __init__(self, epochs=50, learning_rate=0.001):
+        self._epochs = epochs
+        self._lr = learning_rate
+        self._weights = {}
+        self._X = None
+        self._Y = None
 
-    Args:
-        info (Dict[str, ndarray]): dictionary containing X, Y, N and P.
-        weights (Dict[str, ndarray]): dictionary of weights and bias.
-    Returns:
-        (Dict[str, ndarray]): Dictionary of gradients of weights and bias.
-    """
-    # Derivative of the MSE at its input P
-    dLdP = -2 * (info['Y'] - info['P'])
-    # Partial derivatives of the bias addition operation
-    dPdN = np.ones_like(info['N'])
-    dPdB = np.ones_like(weights['B'])
-    # Derivative of the MSE with respect to the outcome of matrix multiplication
-    dLdN = dLdP * dPdN
-    # Partial derivative of matrix multiplication with respect to weights
-    dNdW = np.transpose(info['X'], (1, 0))
-    # Derivatives of MSE with respect to weights
-    dLdW = np.dot(dNdW, dLdN)
-    # Derivatives of MSE with respect to bias
-    dLdB = (dLdP * dPdB).sum(axis=0)
+    def fit(self, X: ndarray, Y:ndarray) -> None:
+        assert X.shape[0] == Y.shape[0]
 
-    gradients = {}
-    gradients['W'] = dLdW
-    gradients['B'] = dLdB
+        self._initialize_weights(X.shape)
+        assert self._weights['W'].shape == (X.shape[1], 1)
+        assert self._weights['B'].shape == (1, 1)
 
-    return gradients
+        self._train(X, Y)
+
+    def predict(self, X: ndarray) -> ndarray:
+
+        predictions = X @ self._weights['W'] + self._weights['B']
+        return predictions
+
+    def score(self, X: ndarray, Y: ndarray, metric='rmse') -> float:
+
+        metrics = {
+            'mae': mae,
+            'sse': sse,
+            'mse': mse,
+            'rmse': rmse
+        }
+
+        predictions = X @ self._weights['W'] + self._weights['B']
+        if metric == 'mae':
+            score = mae(Y, predictions)
+        elif metric == 'sse':
+            score = sse(Y, predictions)
+        elif metric == 'mse':
+            score = mse(Y, predictions)
+        else:
+            score = rmse(Y, predictions)
+        return score
+
+    def _initialize_weights(self, shape: Tuple[int, int]) -> None:
+
+        self._weights = {
+            'W': np.random.rand(shape[1], 1),
+            'B': np.random.rand(1, 1)
+        }
+
+    def _train(self, X: ndarray, Y: ndarray) -> None:
+
+        for i in range(self._epochs):
+            print('Epoch: ', i+1)
+            loss, info = forward(X, Y, self._weights) #TODO Compute forward propagation
+            print('Loss: ', loss)
+            grads = backward(info, self._weights) #TODO Compute backward propagation
+            self._weights['W'] = self._weights['W'] - grads['W']*self._lr #TODO
+            self._weights['B'] = self._weights['B'] - grads['B']*self._lr #TODO
